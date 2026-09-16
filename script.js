@@ -68,9 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
             secondProgressCircle.style.strokeDashoffset = offset;
         }
 
-        // Full Date Display
-        const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('full-date').textContent = now.toLocaleDateString(undefined, optionsDate);
+        // Chinese Full Date Display (e.g. 2026年9月16日 星期三)
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const date = now.getDate();
+        const dayNames = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        const dayStr = dayNames[now.getDay()];
+        
+        document.getElementById('full-date').textContent = `${year}年${month}月${date}日 ${dayStr}`;
 
         // Timezone display
         const tzOffsetMinutes = -now.getTimezoneOffset();
@@ -79,14 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const sign = tzOffsetMinutes >= 0 ? '+' : '-';
         const formattedOffset = `UTC${sign}${String(offsetHours).padStart(2, '0')}:${String(offsetMins).padStart(2, '0')}`;
         
-        const tzName = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local Time';
+        const tzName = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Taipei';
         document.getElementById('tz-name').textContent = `${formattedOffset} (${tzName})`;
 
         // Dynamic Time-based Greeting
         updateGreeting(now.getHours());
-
-        // Update World Clocks
-        updateWorldClocks(now);
     }
 
     function updateGreeting(currentHour) {
@@ -95,41 +97,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const greetingText = document.getElementById('greeting-text');
 
         if (currentHour >= 5 && currentHour < 12) {
-            greetingText.textContent = 'Good Morning';
+            greetingText.textContent = '早安 (Good Morning)';
             greetingIcon.className = 'fa-solid fa-sun';
         } else if (currentHour >= 12 && currentHour < 18) {
-            greetingText.textContent = 'Good Afternoon';
+            greetingText.textContent = '午安 (Good Afternoon)';
             greetingIcon.className = 'fa-solid fa-cloud-sun';
         } else {
-            greetingText.textContent = 'Good Evening';
+            greetingText.textContent = '晚安 (Good Evening)';
             greetingIcon.className = 'fa-solid fa-moon';
         }
-    }
-
-    function updateWorldClocks(now) {
-        const timezones = [
-            { id: 'time-london', tz: 'Europe/London' },
-            { id: 'time-ny', tz: 'America/New_York' },
-            { id: 'time-tokyo', tz: 'Asia/Tokyo' },
-            { id: 'time-sf', tz: 'America/Los_Angeles' }
-        ];
-
-        timezones.forEach(item => {
-            const el = document.getElementById(item.id);
-            if (el) {
-                try {
-                    const timeStr = now.toLocaleTimeString('en-US', {
-                        timeZone: item.tz,
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: !is24HourFormat
-                    });
-                    el.textContent = timeStr;
-                } catch (e) {
-                    el.textContent = '--:--';
-                }
-            }
-        });
     }
 
     /* ==========================================================================
@@ -140,27 +116,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const savedName = localStorage.getItem('user_name');
         if (savedName) {
             userNameEl.textContent = savedName;
+        } else {
+            userNameEl.textContent = '潘兆邠';
         }
 
         // Format Persistence
         const savedFormat = localStorage.getItem('clock_format_24h');
         if (savedFormat === 'true') {
             is24HourFormat = true;
-            toggleFormatBtn.textContent = '24H Format';
+            toggleFormatBtn.textContent = '24H 格式';
         }
 
         // Theme Persistence
-        const savedTheme = localStorage.getItem('user_theme') || 'aurora';
+        const savedTheme = localStorage.getItem('user_theme') || 'obsidian';
         setTheme(savedTheme);
     }
 
     function setupEventListeners() {
         // Editable Name Save
         userNameEl.addEventListener('blur', () => {
-            const newName = userNameEl.textContent.trim() || 'dainosososo';
+            const newName = userNameEl.textContent.trim() || '潘兆邠';
             userNameEl.textContent = newName;
             localStorage.setItem('user_name', newName);
-            showToast(`Name updated to "${newName}"`);
+            showToast(`姓名已更新為 "${newName}"`);
         });
 
         userNameEl.addEventListener('keydown', (e) => {
@@ -173,9 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Toggle 12h / 24h
         toggleFormatBtn.addEventListener('click', () => {
             is24HourFormat = !is24HourFormat;
-            toggleFormatBtn.textContent = is24HourFormat ? '24H Format' : '12H Format';
+            toggleFormatBtn.textContent = is24HourFormat ? '24H 格式' : '12H 格式';
             localStorage.setItem('clock_format_24h', is24HourFormat);
-            showToast(`Switched to ${is24HourFormat ? '24-hour' : '12-hour'} format`);
+            showToast(`切換為 ${is24HourFormat ? '24 小時' : '12 小時'} 制`);
             updateClock();
         });
 
@@ -191,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
         copyTimeBtn.addEventListener('click', () => {
             const isoString = new Date().toISOString();
             navigator.clipboard.writeText(isoString).then(() => {
-                showToast('ISO Timestamp copied!');
+                showToast('ISO 時間標記已複製！');
             }).catch(() => {
-                showToast('Failed to copy timestamp');
+                showToast('複製失敗');
             });
         });
     }
@@ -270,7 +248,6 @@ document.addEventListener('DOMContentLoaded', () => {
         function animate() {
             ctx.clearRect(0, 0, width, height);
 
-            // Draw particles and faint connection lines
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();

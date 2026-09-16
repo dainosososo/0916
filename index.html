@@ -1,96 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Workspace & Live Clock</title>
-    <meta name="description" content="Personal landing page displaying live local time, customized profile, and world clocks.">
-    <!-- Google Fonts -->
+    <title>潘兆邠 | 個人簡介 & 即時時鐘 Dashboard</title>
+    <meta name="description" content="潘兆邠 (Pan Zhao-Bin) 個人網站 - 國立中興大學資訊工程學系碩士班碩一。展示個人簡介、專業技能、NTUE 校園導覽 App 專案作品與 JavaScript 即時時鐘。">
+    <!-- Google Fonts: Noto Sans TC, Outfit, JetBrains Mono, Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="aurora">
-    <!-- Animated Background Canvas -->
+<body data-theme="obsidian">
+    <!-- Animated Canvas Background -->
     <canvas id="bg-canvas"></canvas>
     <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
 
     <div class="app-container">
-        <!-- Header Controls -->
+        <!-- Top Navigation / Header -->
         <header class="top-nav">
             <div class="brand">
-                <i class="fa-solid fa-sparkles"></i>
-                <span>Personal Dashboard</span>
+                <i class="fa-solid fa-code"></i>
+                <span>Pan Zhao-Bin &bull; Personal Space</span>
             </div>
             <div class="theme-controls">
-                <button class="theme-btn active" data-set-theme="aurora" title="Aurora Theme">
-                    <span class="theme-dot aurora"></span> Aurora
+                <button class="theme-btn active" data-set-theme="obsidian" title="簡約黑 (Obsidian)">
+                    <span class="theme-dot obsidian"></span> 簡約黑
                 </button>
-                <button class="theme-btn" data-set-theme="cyber" title="Cyberpunk Theme">
-                    <span class="theme-dot cyber"></span> Cyber
+                <button class="theme-btn" data-set-theme="cyber" title="科技青 (Cyber)">
+                    <span class="theme-dot cyber"></span> 科技青
                 </button>
-                <button class="theme-btn" data-set-theme="sunset" title="Sunset Theme">
-                    <span class="theme-dot sunset"></span> Sunset
+                <button class="theme-btn" data-set-theme="aurora" title="極光紫 (Aurora)">
+                    <span class="theme-dot aurora"></span> 極光紫
                 </button>
             </div>
         </header>
 
-        <!-- Main Dashboard Content -->
+        <!-- Main Dashboard Grid -->
         <main class="dashboard-grid">
-            <!-- Left Hero Card: Profile & Greeting -->
+            
+            <!-- SECTION 1: Profile 個人簡介 -->
             <section class="card profile-card glass">
                 <div class="card-bg-gradient"></div>
+                
                 <div class="profile-header">
                     <div class="avatar-wrapper">
-                        <img id="avatar-img" src="avatar.jpg" alt="Profile Avatar" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'">
-                        <div class="status-indicator" title="Online & Active"></div>
+                        <img id="avatar-img" src="avatar.jpg" alt="潘兆邠 Avatar" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'">
+                        <div class="status-indicator" title="在線中 / 研讀與 Coding"></div>
                     </div>
+                    
                     <div class="profile-info">
                         <div class="greeting-badge" id="greeting-badge">
                             <i class="fa-solid fa-sun" id="greeting-icon"></i>
-                            <span id="greeting-text">Good day</span>
+                            <span id="greeting-text">早安</span>
                         </div>
                         <h1 class="name-container">
-                            <span id="user-name" contenteditable="true" spellcheck="false" title="Click to edit your name">dainosososo</span>
-                            <i class="fa-solid fa-pen-to-square edit-icon" title="Click text to edit name"></i>
+                            <span id="user-name" contenteditable="true" spellcheck="false" title="點擊可編輯姓名">潘兆邠</span>
+                            <i class="fa-solid fa-pen-to-square edit-icon" title="點擊文字可編輯姓名"></i>
                         </h1>
-                        <p class="role-subtitle">GitHub Repository: dainosososo/0916</p>
+                        <p class="role-subtitle">
+                            <i class="fa-solid fa-graduation-cap"></i> 國立中興大學 資訊工程學系 碩士班碩一
+                        </p>
+                        <p class="specialty-badge"><i class="fa-solid fa-terminal"></i> 專長領域: Coding &bull; AI &bull; Machine Learning</p>
                     </div>
                 </div>
 
                 <div class="profile-bio">
-                    <p>Welcome to my personal interactive space. Time is synchronized live with your local timezone.</p>
+                    <p><i class="fa-solid fa-quote-left bio-quote-icon"></i> 我就讀中興大學資訊工程系碩士班碩一。熱愛演算法與軟體開發，專注於 Machine Learning、AI 智慧系統與 C/C++/Python 系統建構。</p>
                 </div>
 
                 <div class="profile-actions">
                     <div class="status-pill">
                         <span class="pulse-dot"></span>
-                        <span id="status-text">Available for collaboration</span>
+                        <span id="status-text">中興資工碩一 &bull; 積極學習中</span>
                     </div>
                     <button class="action-btn" id="copy-time-btn">
                         <i class="fa-regular fa-copy"></i>
-                        <span>Copy ISO Timestamp</span>
+                        <span>複製當前 ISO 時間標記</span>
                     </button>
                 </div>
             </section>
 
-            <!-- Center Clock Hero Card -->
+            <!-- SECTION 4: Live Clock 即時時鐘 -->
             <section class="card clock-card glass">
                 <div class="clock-header">
                     <div class="clock-title">
                         <i class="fa-regular fa-clock"></i>
-                        <span>Local Timezone</span>
+                        <span>即時動態時鐘 (Live Clock)</span>
                     </div>
                     <div class="clock-options">
-                        <button id="toggle-format" class="pill-btn">12H Format</button>
+                        <button id="toggle-format" class="pill-btn">12H 格式</button>
                     </div>
                 </div>
 
-                <!-- Clock Display -->
+                <!-- Clock Display Rings -->
                 <div class="digital-clock-container">
                     <svg class="progress-ring" width="280" height="280">
                         <circle class="progress-ring__circle-bg" stroke="rgba(255, 255, 255, 0.08)" stroke-width="6" fill="transparent" r="130" cx="140" cy="140"/>
@@ -105,7 +111,7 @@
 
                     <div class="clock-digits">
                         <div class="time-main">
-                            <span id="clock-hours">10</span>:<span id="clock-minutes">12</span>:<span id="clock-seconds">54</span>
+                            <span id="clock-hours">10</span>:<span id="clock-minutes">48</span>:<span id="clock-seconds">11</span>
                             <span id="clock-ampm" class="ampm-tag">AM</span>
                         </div>
                         <div class="time-milliseconds" id="clock-millis">.000</div>
@@ -113,42 +119,102 @@
                 </div>
 
                 <div class="date-display">
-                    <div class="full-date" id="full-date">Wednesday, September 16, 2026</div>
+                    <div class="full-date" id="full-date">2026年9月16日 星期三</div>
                     <div class="timezone-info" id="timezone-info">
-                        <i class="fa-solid fa-earth-americas"></i>
-                        <span id="tz-name">UTC+08:00 (Local Time)</span>
+                        <i class="fa-solid fa-earth-asia"></i>
+                        <span id="tz-name">UTC+08:00 (Asia/Taipei)</span>
                     </div>
                 </div>
             </section>
 
-            <!-- Bottom World Clocks & Quick Info Grid -->
-            <section class="card world-clocks-card glass">
-                <h3 class="section-title"><i class="fa-solid fa-globe"></i> World Timezones</h3>
-                <div class="world-clock-grid">
-                    <div class="world-clock-item">
-                        <div class="city-name">London</div>
-                        <div class="city-time" id="time-london">03:12 AM</div>
-                        <div class="city-offset">UTC+1</div>
+            <!-- SECTION 2: Skills 技能專長 (至少列出 3 項) -->
+            <section class="card skills-card glass">
+                <h3 class="section-title"><i class="fa-solid fa-gears"></i> 🛠️ 專業技能 (Skills)</h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-icon python-icon"><i class="fa-brands fa-python"></i></div>
+                        <div class="skill-info">
+                            <div class="skill-name">Python</div>
+                            <div class="skill-desc">資料處理、AI模型訓練與自動化腳本</div>
+                        </div>
                     </div>
-                    <div class="world-clock-item">
-                        <div class="city-name">New York</div>
-                        <div class="city-time" id="time-ny">10:12 PM</div>
-                        <div class="city-offset">UTC-4</div>
+                    <div class="skill-item">
+                        <div class="skill-icon cpp-icon"><i class="fa-solid fa-code"></i></div>
+                        <div class="skill-info">
+                            <div class="skill-name">C / C++</div>
+                            <div class="skill-desc">高效能程式設計、資料結構與演算法</div>
+                        </div>
                     </div>
-                    <div class="world-clock-item">
-                        <div class="city-name">Tokyo</div>
-                        <div class="city-time" id="time-tokyo">11:12 PM</div>
-                        <div class="city-offset">UTC+9</div>
+                    <div class="skill-item">
+                        <div class="skill-icon ml-icon"><i class="fa-solid fa-brain"></i></div>
+                        <div class="skill-info">
+                            <div class="skill-name">Machine Learning</div>
+                            <div class="skill-desc">機器學習建模、數據分析與特徵工程</div>
+                        </div>
                     </div>
-                    <div class="world-clock-item">
-                        <div class="city-name">San Francisco</div>
-                        <div class="city-time" id="time-sf">07:12 PM</div>
-                        <div class="city-offset">UTC-7</div>
+                    <div class="skill-item">
+                        <div class="skill-icon ai-icon"><i class="fa-solid fa-robot"></i></div>
+                        <div class="skill-info">
+                            <div class="skill-name">AI (Artificial Intelligence)</div>
+                            <div class="skill-desc">人工智慧應用、神經網路與智慧推論系統</div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon map-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                        <div class="skill-info">
+                            <div class="skill-name">Mapbox & Web GIS</div>
+                            <div class="skill-desc">地圖 API 整合、空間座標比對與即時導航</div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Social Links & Quick Actions -->
+            <!-- SECTION 3: Projects 專案作品 -->
+            <section class="card project-card glass">
+                <div class="project-card-header">
+                    <h3 class="section-title"><i class="fa-solid fa-rocket"></i> 🚀 專案作品 (Projects)</h3>
+                    <span class="project-badge">畢業專題 / 代表作</span>
+                </div>
+                
+                <div class="project-content">
+                    <div class="project-main-info">
+                        <h4 class="project-title">NTUE 校園導覽 App</h4>
+                        <p class="project-tagline"><i class="fa-solid fa-map-pin"></i> 專為國立臺北教育大學打造的即時互動式校園導覽與處室搜尋 APP</p>
+                    </div>
+
+                    <div class="project-details-grid">
+                        <div class="project-detail-box">
+                            <h5><i class="fa-solid fa-magnifying-glass"></i> 教室與處室即時搜尋系統</h5>
+                            <p>建構即時關鍵字比對機制，針對輸入處室名稱或教室編號進行自動格式化處理，有效縮小搜尋範圍提升精準度。可自動將地圖置中顯示目標建築並清除其他無關地標，彈出結果視窗並支援一鍵啟動導覽。</p>
+                        </div>
+
+                        <div class="project-detail-box">
+                            <h5><i class="fa-solid fa-building-user"></i> 建築資訊與地標互動介面</h5>
+                            <p>彙整校園建築資訊，打造直觀簡約的展示介面。使用者可點擊地圖上的建築地標查看樓層配置與詳細處室簡介，並隨時執行路線導覽功能。</p>
+                        </div>
+                    </div>
+
+                    <div class="project-summary-box">
+                        <i class="fa-solid fa-circle-check check-icon"></i>
+                        <span><strong>效益總結：</strong>整合「搜尋」與「地圖導覽」兩大核心功能，提供極致便捷的校園空間資訊查詢體驗，大幅提升尋找教室與處室的效率。</span>
+                    </div>
+
+                    <div class="project-footer">
+                        <div class="tech-stack-tags">
+                            <span class="tech-tag"><i class="fa-solid fa-layer-group"></i> Mapbox</span>
+                            <span class="tech-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
+                            <span class="tech-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
+                            <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+                        </div>
+                        <div class="github-link-badge">
+                            <i class="fa-brands fa-github"></i>
+                            <span>GitHub Link: 無 (Private Repo)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: Quick Connect & Socials -->
             <section class="card links-card glass">
                 <h3 class="section-title"><i class="fa-solid fa-link"></i> Quick Connect</h3>
                 <div class="social-links">
@@ -156,32 +222,33 @@
                         <i class="fa-brands fa-github"></i>
                         <span>dainosososo/0916</span>
                     </a>
-                    <a href="https://linkedin.com" target="_blank" class="social-btn linkedin">
-                        <i class="fa-brands fa-linkedin"></i>
-                        <span>LinkedIn</span>
+                    <a href="https://www.nchu.edu.tw" target="_blank" class="social-btn nchu">
+                        <i class="fa-solid fa-school"></i>
+                        <span>國立中興大學</span>
                     </a>
-                    <a href="https://twitter.com" target="_blank" class="social-btn twitter">
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <span>Twitter</span>
-                    </a>
-                    <a href="mailto:alex@example.com" class="social-btn email">
+                    <a href="mailto:zhaobin@example.com" class="social-btn email">
                         <i class="fa-regular fa-envelope"></i>
-                        <span>Email</span>
+                        <span>Email Contact</span>
+                    </a>
+                    <a href="https://github.com/dainosososo" target="_blank" class="social-btn profile-gh">
+                        <i class="fa-solid fa-user-gear"></i>
+                        <span>GitHub Profile</span>
                     </a>
                 </div>
             </section>
+
         </main>
 
         <!-- Footer -->
         <footer class="app-footer">
-            <p>Crafted with <i class="fa-solid fa-heart heart-icon"></i> &bull; Dynamic Live Clock Dashboard</p>
+            <p><strong>潘兆邠 (Pan Zhao-Bin)</strong> &bull; 國立中興大學資訊工程學系碩士班碩一 &bull; Personal Dashboard</p>
         </footer>
     </div>
 
     <!-- Notification Toast -->
     <div id="toast" class="toast hidden">
         <i class="fa-solid fa-circle-check"></i>
-        <span id="toast-message">Copied to clipboard!</span>
+        <span id="toast-message">複製成功！</span>
     </div>
 
     <script src="script.js"></script>
