@@ -112,12 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
        User Preferences & Interactivity
        ========================================================================== */
     function initPreferences() {
-        // Name Persistence
+        // Name Persistence (Reset legacy cached names)
         const savedName = localStorage.getItem('user_name');
-        if (savedName) {
+        if (savedName && savedName !== 'Alex Rivera' && savedName !== 'dainosososo') {
             userNameEl.textContent = savedName;
         } else {
             userNameEl.textContent = '潘兆邠';
+            localStorage.setItem('user_name', '潘兆邠');
         }
 
         // Format Persistence
