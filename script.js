@@ -126,7 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleFormatBtn.textContent = '24H 格式';
         }
 
-        const savedTheme = localStorage.getItem('user_theme') || 'washi';
+        let savedTheme = localStorage.getItem('user_theme');
+        if (!savedTheme || !['washi', 'matcha', 'sakura'].includes(savedTheme)) {
+            savedTheme = 'washi';
+            localStorage.setItem('user_theme', 'washi');
+        }
         setTheme(savedTheme);
     }
 
