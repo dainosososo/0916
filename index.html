@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>潘兆邠 | 個人簡介 & 即時時鐘 Dashboard</title>
-    <meta name="description" content="潘兆邠 (Pan Zhao-Bin) 個人網站 - 國立中興大學資訊工程學系碩士班碩一。展示個人簡介、專業技能、NTUE 校園導覽 App 專案作品與 JavaScript 即時時鐘。">
-    <!-- Google Fonts: Noto Sans TC, Outfit, JetBrains Mono, Space Grotesk -->
+    <meta name="description" content="潘兆邠 (Pan Zhao-Bin) 個人網站 - 國立中興大學資訊工程學系碩士班碩一。白色日式簡約風個人簡介、專業技能、NTUE 校園導覽 App 專案作品與 JavaScript 即時時鐘。">
+    <!-- Google Fonts: Noto Serif TC, Noto Sans TC, Outfit, JetBrains Mono, Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700;900&family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="obsidian">
+<body data-theme="washi">
     <!-- Animated Canvas Background -->
     <canvas id="bg-canvas"></canvas>
     <div class="ambient-glow glow-1"></div>
@@ -23,18 +23,18 @@
         <!-- Top Navigation / Header -->
         <header class="top-nav">
             <div class="brand">
-                <i class="fa-solid fa-code"></i>
-                <span>Pan Zhao-Bin &bull; Personal Space</span>
+                <i class="fa-solid fa-fan"></i>
+                <span>Pan Zhao-Bin &bull; 個人首頁</span>
             </div>
             <div class="theme-controls">
-                <button class="theme-btn active" data-set-theme="obsidian" title="簡約黑 (Obsidian)">
-                    <span class="theme-dot obsidian"></span> 簡約黑
+                <button class="theme-btn active" data-set-theme="washi" title="和風白 (Washi White)">
+                    <span class="theme-dot washi"></span> 和風白
                 </button>
-                <button class="theme-btn" data-set-theme="cyber" title="科技青 (Cyber)">
-                    <span class="theme-dot cyber"></span> 科技青
+                <button class="theme-btn" data-set-theme="matcha" title="抹茶綠 (Matcha Zen)">
+                    <span class="theme-dot matcha"></span> 抹茶綠
                 </button>
-                <button class="theme-btn" data-set-theme="aurora" title="極光紫 (Aurora)">
-                    <span class="theme-dot aurora"></span> 極光紫
+                <button class="theme-btn" data-set-theme="sakura" title="櫻花粉 (Sakura Bloom)">
+                    <span class="theme-dot sakura"></span> 櫻花粉
                 </button>
             </div>
         </header>
@@ -98,13 +98,13 @@
 
                 <!-- Clock Display Rings -->
                 <div class="digital-clock-container">
-                    <svg class="progress-ring" width="280" height="280">
-                        <circle class="progress-ring__circle-bg" stroke="rgba(255, 255, 255, 0.08)" stroke-width="6" fill="transparent" r="130" cx="140" cy="140"/>
-                        <circle class="progress-ring__circle" id="second-progress" stroke="url(#ring-gradient)" stroke-width="6" stroke-linecap="round" fill="transparent" r="130" cx="140" cy="140"/>
+                    <svg class="progress-ring" width="240" height="240">
+                        <circle class="progress-ring__circle-bg" stroke="rgba(0, 0, 0, 0.05)" stroke-width="5" fill="transparent" r="110" cx="120" cy="120"/>
+                        <circle class="progress-ring__circle" id="second-progress" stroke="url(#ring-gradient)" stroke-width="5" stroke-linecap="round" fill="transparent" r="110" cx="120" cy="120"/>
                         <defs>
                             <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="var(--accent-glow)"/>
-                                <stop offset="100%" stop-color="var(--accent-cyan)"/>
+                                <stop offset="0%" stop-color="var(--accent-matcha)"/>
+                                <stop offset="100%" stop-color="var(--accent-sakura)"/>
                             </linearGradient>
                         </defs>
                     </svg>
@@ -129,7 +129,7 @@
 
             <!-- SECTION 2: Skills 技能專長 (至少列出 3 項) -->
             <section class="card skills-card glass">
-                <h3 class="section-title"><i class="fa-solid fa-gears"></i> 🛠️ 專業技能 (Skills)</h3>
+                <h3 class="section-title"><i class="fa-solid fa-leaf"></i> 🛠️ 專業技能 (Skills)</h3>
                 <div class="skills-grid">
                     <div class="skill-item">
                         <div class="skill-icon python-icon"><i class="fa-brands fa-python"></i></div>
@@ -172,7 +172,7 @@
             <!-- SECTION 3: Projects 專案作品 -->
             <section class="card project-card glass">
                 <div class="project-card-header">
-                    <h3 class="section-title"><i class="fa-solid fa-rocket"></i> 🚀 專案作品 (Projects)</h3>
+                    <h3 class="section-title"><i class="fa-solid fa-compass"></i> 🚀 專案作品 (Projects)</h3>
                     <span class="project-badge">畢業專題 / 代表作</span>
                 </div>
                 
@@ -216,7 +216,7 @@
 
             <!-- SECTION 5: Quick Connect & Socials -->
             <section class="card links-card glass">
-                <h3 class="section-title"><i class="fa-solid fa-link"></i> Quick Connect</h3>
+                <h3 class="section-title"><i class="fa-solid fa-paper-plane"></i> Quick Connect</h3>
                 <div class="social-links">
                     <a href="https://github.com/dainosososo/DIC1_PersonalPage" target="_blank" class="social-btn github">
                         <i class="fa-brands fa-github"></i>
@@ -231,7 +231,7 @@
                         <span>Email Contact</span>
                     </a>
                     <a href="https://github.com/dainosososo" target="_blank" class="social-btn profile-gh">
-                        <i class="fa-solid fa-user-gear"></i>
+                        <i class="fa-solid fa-user"></i>
                         <span>GitHub Profile</span>
                     </a>
                 </div>
@@ -241,7 +241,7 @@
 
         <!-- Footer -->
         <footer class="app-footer">
-            <p><strong>潘兆邠 (Pan Zhao-Bin)</strong> &bull; 國立中興大學資訊工程學系碩士班碩一 &bull; Personal Dashboard</p>
+            <p><strong>潘兆邠 (Pan Zhao-Bin)</strong> &bull; 國立中興大學資訊工程學系碩士班碩一 &bull; Japanese Zen Minimalist Page</p>
         </footer>
     </div>
 

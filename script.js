@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start Clock Loop
     updateClock();
-    setInterval(updateClock, 30); // smooth millisecond update
+    setInterval(updateClock, 30);
 
-    // Initialize Canvas Background
+    // Initialize Canvas Background (Japanese Soft Particles)
     initParticleCanvas();
 
     // Event Listeners
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ampm = hours >= 12 ? 'PM' : 'AM';
         if (!is24HourFormat) {
             hours = hours % 12;
-            hours = hours ? hours : 12; // 0 becomes 12
+            hours = hours ? hours : 12;
         }
 
         // Format strings
@@ -59,16 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
             ampmEl.textContent = ampm;
         }
 
-        // Circular Progress Ring (Seconds + Millis smoothness)
+        // Circular Progress Ring
         const secondProgressCircle = document.getElementById('second-progress');
         if (secondProgressCircle) {
-            const circumference = 2 * Math.PI * 130; // r = 130
+            const circumference = 2 * Math.PI * 110;
             const totalSecondsFraction = seconds + (millis / 1000);
             const offset = circumference - (totalSecondsFraction / 60) * circumference;
             secondProgressCircle.style.strokeDashoffset = offset;
         }
 
-        // Chinese Full Date Display (e.g. 2026年9月16日 星期三)
+        // Chinese Full Date Display
         const year = now.getFullYear();
         const month = now.getMonth() + 1;
         const date = now.getDate();
@@ -97,13 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const greetingText = document.getElementById('greeting-text');
 
         if (currentHour >= 5 && currentHour < 12) {
-            greetingText.textContent = '早安 (Good Morning)';
+            greetingText.textContent = '早安 (おはよう)';
             greetingIcon.className = 'fa-solid fa-sun';
         } else if (currentHour >= 12 && currentHour < 18) {
-            greetingText.textContent = '午安 (Good Afternoon)';
+            greetingText.textContent = '午安 (こんにちは)';
             greetingIcon.className = 'fa-solid fa-cloud-sun';
         } else {
-            greetingText.textContent = '晚安 (Good Evening)';
+            greetingText.textContent = '晚安 (こんばんは)';
             greetingIcon.className = 'fa-solid fa-moon';
         }
     }
@@ -112,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
        User Preferences & Interactivity
        ========================================================================== */
     function initPreferences() {
-        // Name Persistence (Reset legacy cached names)
         const savedName = localStorage.getItem('user_name');
         if (savedName && savedName !== 'Alex Rivera' && savedName !== 'dainosososo') {
             userNameEl.textContent = savedName;
@@ -121,20 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('user_name', '潘兆邠');
         }
 
-        // Format Persistence
         const savedFormat = localStorage.getItem('clock_format_24h');
         if (savedFormat === 'true') {
             is24HourFormat = true;
             toggleFormatBtn.textContent = '24H 格式';
         }
 
-        // Theme Persistence
-        const savedTheme = localStorage.getItem('user_theme') || 'obsidian';
+        const savedTheme = localStorage.getItem('user_theme') || 'washi';
         setTheme(savedTheme);
     }
 
     function setupEventListeners() {
-        // Editable Name Save
         userNameEl.addEventListener('blur', () => {
             const newName = userNameEl.textContent.trim() || '潘兆邠';
             userNameEl.textContent = newName;
@@ -149,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Toggle 12h / 24h
         toggleFormatBtn.addEventListener('click', () => {
             is24HourFormat = !is24HourFormat;
             toggleFormatBtn.textContent = is24HourFormat ? '24H 格式' : '12H 格式';
@@ -158,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateClock();
         });
 
-        // Theme Switcher Buttons
         document.querySelectorAll('[data-set-theme]').forEach(btn => {
             btn.addEventListener('click', () => {
                 const themeName = btn.getAttribute('data-set-theme');
@@ -166,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Copy Timestamp Button
         copyTimeBtn.addEventListener('click', () => {
             const isoString = new Date().toISOString();
             navigator.clipboard.writeText(isoString).then(() => {
@@ -199,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
-       Interactive Canvas Particle Background
+       Soft Japanese Zen Canvas Particles
        ========================================================================== */
     function initParticleCanvas() {
         const canvas = document.getElementById('bg-canvas');
@@ -210,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let height = canvas.height = window.innerHeight;
 
         let particles = [];
-        const particleCount = 45;
+        const particleCount = 35;
 
         class Particle {
             constructor() {
@@ -220,10 +213,10 @@ document.addEventListener('DOMContentLoaded', () => {
             reset() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.radius = Math.random() * 2 + 1;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = (Math.random() - 0.5) * 0.4;
-                this.alpha = Math.random() * 0.5 + 0.2;
+                this.radius = Math.random() * 2.5 + 1;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = Math.random() * 0.4 + 0.1; // gentle downward drift
+                this.alpha = Math.random() * 0.4 + 0.15;
             }
 
             update() {
@@ -231,13 +224,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.y += this.vy;
 
                 if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
+                if (this.y > height) this.y = 0;
             }
 
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                ctx.fillStyle = `rgba(77, 100, 87, ${this.alpha})`;
                 ctx.fill();
             }
         }
@@ -258,12 +251,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
-                    if (dist < 120) {
+                    if (dist < 100) {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.08 * (1 - dist / 120)})`;
-                        ctx.lineWidth = 0.6;
+                        ctx.strokeStyle = `rgba(120, 113, 108, ${0.06 * (1 - dist / 100)})`;
+                        ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
                 }
