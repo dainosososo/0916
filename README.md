@@ -1,10 +1,10 @@
-# 0916 - 潘兆邠 (Pan Zhao-Bin) 個人簡介 & 即時時鐘 Dashboard
+# DIC1_PersonalPage - 潘兆邠 (Pan Zhao-Bin) 個人簡介 & 即時時鐘 Dashboard
 
 ![Personal Dashboard Preview](preview.png)
 
-## 🌐 Live Demo & GitHub Pages
-- **GitHub Pages:** [https://dainosososo.github.io/0916/](https://dainosososo.github.io/0916/)
-- **Repository:** [https://github.com/dainosososo/0916](https://github.com/dainosososo/0916)
+## 🌐 繳交網址 (Submission URLs)
+- **① GitHub Repository:** [https://github.com/dainosososo/DIC1_PersonalPage](https://github.com/dainosososo/DIC1_PersonalPage)
+- **② Live Website:** [https://dainosososo.github.io/DIC1_PersonalPage/](https://dainosososo.github.io/DIC1_PersonalPage/)
 
 ---
 
